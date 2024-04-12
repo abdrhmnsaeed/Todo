@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    /* Style for the list items */
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+
+<input type="text" id="inputField" placeholder="Add new task">
+<button id="addButton">Add</button>
+
+<ul id="todoList"></ul>
+
+<script>
+document.getElementById("addButton").addEventListener("click", function() {
+    var inputValue = document.getElementById("inputField").value;
+    if (inputValue.trim() === "") {
+        
+        alert("Please enter a task!");
+        return;
+    }
+    if(!isNaN(inputValue) || inputValue.length < 5){
+        alert("Cannot be a number!");
+        return;
+    }else{
+
+    var listItem = document.createElement("li");
+
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    listItem.appendChild(checkbox);
+
+    var textNode = document.createTextNode(inputValue);
+    listItem.appendChild(textNode);
+
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", function() {
+        listItem.remove();
+    });
+    listItem.appendChild(deleteButton);
+
+    document.getElementById("todoList").appendChild(listItem);
+
+    // Clear input field after adding task
+    document.getElementById("inputField").value = "";
+}
+    // var inputValue = document.getElementById("inputField").value;
+    // if (inputValue.trim() === "") {
+    //     alert("Please enter a task!");
+    //     return;
+    // }
+
+    // var listItem = document.createElement("li");
+
+    // var checkbox = document.createElement("input");
+    // checkbox.type = "checkbox";
+    // listItem.appendChild(checkbox);
+
+    // var textNode = document.createTextNode(inputValue);
+    // listItem.appendChild(textNode);
+
+    // var deleteButton = document.createElement("button");
+    // deleteButton.textContent = "Delete";
+    // deleteButton.addEventListener("click", function() {
+    //     listItem.remove();
+    // });
+    // listItem.appendChild(deleteButton);
+
+    // document.getElementById("todoList").appendChild(listItem);
+
+    // // Clear input field after adding task
+    // document.getElementById("inputField").value = "";
+});
+</script>
+
+</body>
+</html>
