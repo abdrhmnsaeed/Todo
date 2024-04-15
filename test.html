@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -86,4 +86,132 @@ document.getElementById("addButton").addEventListener("click", function() {
 </script>
 
 </body>
-</html>
+</html> -->
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta charset="UTF-8">
+    <title>GIRS</title>
+
+    <style>
+
+        body{
+            border: 20px solid green;
+            border-radius: 20px;
+        }
+
+        .img{
+            position: absolute;
+            width: 40%;
+            top: 150px;
+            left: 500px;
+            right: auto;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+    #reciept {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    table.total {
+        width: auto;
+    margin-right: 0px;
+    margin-left: auto; 
+   }
+    
+     td, th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even){background-color: #f2f2f2;}
+    
+    tr:hover {background-color: #ddd;}
+    
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #c7b363;
+      color: white;
+    }
+     .row p {
+        margin-left: 35px; 
+    }
+
+    h3 {
+        margin-top: 35px; 
+    }
+    </style>
+
+</head>
+<body>
+        <div>
+            <div class="leftImage">
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Coat_of_arms_of_Nigeria.svg" class="img" alt="">
+               
+            
+            <!--    <img src="assets/media/logos/ncoa.png" alt="Logo" width="150" class="logo"/>-->
+            <!--    <img align="right" src="assets/media/logos/states.png" alt="state logo" width="150" class="logo"/>-->
+            </div>
+    
+            <h3 align="center"><strong>GOMBE STATE IGR PLATFORM E-REVENUE RECEIPT</strong></h3>
+            
+            
+             
+            <img align="right" src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->generate('Name: ' . $invoice->taxpayer_name . ' | Phone Number: ' . $invoice->phone_number . ' | Amount: ' . $invoice->rate . ' | Revenue Item: ' . $invoice->revenue_item_name . ' | Agency Name: ' . $invoice->agency_name)) }}" alt="QR" width="150" class="logo"/>
+
+
+
+
+    <div class="row">
+                    <p><strong>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ date('Y-m-d H:i:s') }}  </strong></p>
+                    <p><strong>Taxpayer Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ $invoice->taxpayer_name }}</strong></p>
+                    <p><strong>Taxpayer's Phone Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $invoice->phone_number }}</strong></p>
+                    <p><strong>Receipt for:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $invoice->agency_name }}</strong></p>
+                    <p><strong>Subhead:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $invoice->revenue_item_name }}</strong></p>
+                    
+                    <p><strong>Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $invoice->address }}</strong></p>
+                    <p><strong>Details:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $invoice->details }}</strong></p>
+                  
+                    <p><strong>Printed by:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{auth()->user()->name }}</strong></p>
+                    <p><strong>Transaction Reference:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ $invoice->id }}</strong></p>
+        </div>
+    
+    <table id="reciept">
+      <tr>
+        <th>SN</th>
+        <th>Agency</th>
+        <th>Subhead</th>
+        <th>Amount</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>{{ $invoice->agency_name }}</td>
+        <td>{{ $invoice->revenue_item_name}}</td>
+        <td align="right" class="gray"> N {{ number_format($invoice->rate, 2, '.', ',') }}</td>
+      </tr>
+    </table>
+       
+    <table class="total">
+        <tr>
+             <th>Total: <th>N {{ number_format($invoice->rate, 2, '.', ',') }}</th></th>
+        </tr>
+    </table>
+
+    <div class="col-sm-12 mb-10">
+        <!--<span> <strong><h3>Receipt No: {{ $invoice->id }}</h3></strong></span>-->
+    </div>
+    
+    </body>
+    </html>
+
+
+
+

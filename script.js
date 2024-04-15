@@ -8,6 +8,19 @@ function updateTaskCount() {
   document.getElementById('h2').textContent = `Tasks Checked: ${checkedTasks}`;
 }
 
+
+function editTask(event) {
+  const taskElement = event.target.closest(".task");
+  const indexToEdit = parseInt(event.target.parentElement.querySelector('input[type="checkbox"]').dataset.index);
+  const currentTaskText = taskElement.querySelector('h3').textContent;
+  const newTaskText = prompt("Edit your task:", currentTaskText);
+  
+  if (newTaskText !== null && newTaskText.trim() !== "") {
+    saveTask[indexToEdit] = newTaskText;
+    taskElement.querySelector('h3').textContent = newTaskText;
+  }
+}
+
 function getNewTask() {
   let newTask = document.getElementById('task').value;
   let newAdd = document.getElementById('displayTask');
@@ -21,12 +34,13 @@ function getNewTask() {
       <div>
         <h3>${task}</h3>
       </div>
-      <div>
+      <div class="taskAction">
         <label class="checkbox-btn">
           <label for="checkbox"></label>
           <input id="checkbox" class="checkbox" type="checkbox" data-index="${index}">
           <span class="checkmark"></span>
         </label>
+        <img src="edit.png" alt="" class="edit-icon" data-index="${index}">
         <button class="btn del" id="del" data-index="${index}">
           <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
             <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
@@ -50,7 +64,12 @@ function getNewTask() {
     btn.addEventListener("click", deleteTask);
   });
 
-  const checkboxes = document.querySelectorAll('.checkbox');
+  let editIcons = document.querySelectorAll('.edit-icon');
+  editIcons.forEach(icon => {
+    icon.addEventListener("click", editTask);
+  });
+
+  let checkboxes = document.querySelectorAll('.checkbox');
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", function() {
       updateTaskCount();
@@ -81,6 +100,22 @@ function toggleTask(event) {
   }
   updateTaskCount(); 
 }
+
+
+function myFunction() {
+  let input = document.getElementById("search");
+  let inputContent = input.value.toUpperCase();
+  let getTask = document.getElementsByTagName("h3")[0];
+  for (i = 0; i < li.length; i++) {
+      let txtValue = getTask.textContent || getTask.innerText;
+      if (txtValue.toUpperCase().indexOf(inputContent) > -1) {
+          [i].style.display = "";
+      } else {
+          [i].style.display = "none";
+      }
+  }
+}
+
 
 
 
