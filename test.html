@@ -1,6 +1,5 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
+<!-- <html lang="en">
+    <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>To-Do List</title>
@@ -16,8 +15,8 @@
 </style>
 </head>
 <body>
-
-<input type="text" id="inputField" placeholder="Add new task">
+    
+    <input type="text" id="inputField" placeholder="Add new task">
 <button id="addButton">Add</button>
 
 <ul id="todoList"></ul>
@@ -40,10 +39,10 @@ document.getElementById("addButton").addEventListener("click", function() {
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     listItem.appendChild(checkbox);
-
+    
     var textNode = document.createTextNode(inputValue);
     listItem.appendChild(textNode);
-
+    
     var deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", function() {
@@ -56,8 +55,8 @@ document.getElementById("addButton").addEventListener("click", function() {
     // Clear input field after adding task
     document.getElementById("inputField").value = "";
 }
-    // var inputValue = document.getElementById("inputField").value;
-    // if (inputValue.trim() === "") {
+// var inputValue = document.getElementById("inputField").value;
+// if (inputValue.trim() === "") {
     //     alert("Please enter a task!");
     //     return;
     // }
@@ -67,17 +66,17 @@ document.getElementById("addButton").addEventListener("click", function() {
     // var checkbox = document.createElement("input");
     // checkbox.type = "checkbox";
     // listItem.appendChild(checkbox);
-
+    
     // var textNode = document.createTextNode(inputValue);
     // listItem.appendChild(textNode);
-
+    
     // var deleteButton = document.createElement("button");
     // deleteButton.textContent = "Delete";
     // deleteButton.addEventListener("click", function() {
-    //     listItem.remove();
-    // });
-    // listItem.appendChild(deleteButton);
-
+        //     listItem.remove();
+        // });
+        // listItem.appendChild(deleteButton);
+        
     // document.getElementById("todoList").appendChild(listItem);
 
     // // Clear input field after adding task
@@ -89,29 +88,62 @@ document.getElementById("addButton").addEventListener("click", function() {
 </html> -->
 
 
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta charset="UTF-8">
     <title>GIRS</title>
-
+    
     <style>
-
-        body{
+     .body{
             border: 20px solid green;
             border-radius: 20px;
+            background: rgba(0, 0, 0, 0.047);
+            /* position: relative; */
+            /* background: rgba(0, 0, 0, 0.047);
+            background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='110' height='30'><text x='0' y='20' fill='black' fill-opacity='0.1' font-size='16' font-family='Arial'>Jewel ICT Hub</text></svg>");
+            background-repeat: repeat; 
+            background-size: auto; */
+            
+            /* background-repeat: repeat; */
+            position: relative;
+            overflow: hidden;
+            /* z-index: 3; */
+            
         }
 
-        .img{
-            position: absolute;
-            width: 40%;
-            top: 150px;
-            left: 500px;
-            right: auto;
-            z-index: -1;
-            opacity: 0.1;
-        }
-        
+        .img {
+    width: 50%;
+    opacity: 0.1;
+}
+
+.img2{
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+.leftImage h1{
+    font-size: 40px;
+    font-weight: 1000;
+    color: rgba(0, 0, 0, 0.358);
+    text-align: center;
+}
+
+.leftImage{
+    display: flex;
+    margin: 0 auto;
+    width: 50%;
+    justify-content: space-between;
+    height: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    position: absolute;
+    z-index: -1;
+}
+
     #reciept {
       font-family: Arial, Helvetica, sans-serif;
       border-collapse: collapse;
@@ -147,18 +179,36 @@ document.getElementById("addButton").addEventListener("click", function() {
     h3 {
         margin-top: 35px; 
     }
+
+    .waterMark{
+        z-index: -1;
+        position: fixed;
+        color: rgba(0, 0, 0, 0.273);
+    }
+    .water{
+        position: absolute;
+        opacity: 0.3;
+        z-index: -1;
+    }
     </style>
 
 </head>
-<body>
+<body id="body">
+    <div class="body">
+        <div class="water"></div>
+        <div class="waterMark">
+
+        </div>
+
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Coat_of_arms_of_Nigeria.svg" class="img2" alt="">
         <div>
             <div class="leftImage">
 
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Coat_of_arms_of_Nigeria.svg" class="img" alt="">
+                <h1>{{ $invoice->id }}</h1>
                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Coat_of_arms_of_Nigeria.svg" class="img" alt="">
             
-            <!--    <img src="assets/media/logos/ncoa.png" alt="Logo" width="150" class="logo"/>-->
-            <!--    <img align="right" src="assets/media/logos/states.png" alt="state logo" width="150" class="logo"/>-->
             </div>
     
             <h3 align="center"><strong>GOMBE STATE IGR PLATFORM E-REVENUE RECEIPT</strong></h3>
@@ -208,9 +258,31 @@ document.getElementById("addButton").addEventListener("click", function() {
     <div class="col-sm-12 mb-10">
         <!--<span> <strong><h3>Receipt No: {{ $invoice->id }}</h3></strong></span>-->
     </div>
-    
+
+</div>
+
+
+
+<script>
+    function water(){
+        let text = ""
+        for(let i = 0; i<1000; i++){
+            text += "Jewel ICT Hub"
+            // text.style.zIndex = "-1";
+        }
+        document.querySelector(".water").innerHTML = text;
+    }
+   
+
+    water()
+</script>
     </body>
     </html>
+
+
+
+
+
 
 
 
